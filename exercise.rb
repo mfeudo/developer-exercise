@@ -5,41 +5,42 @@ class Exercise
   # If the word being replaced has a capital first letter, it should instead be replaced with "Marklar".
   def self.marklar(str)
 
-    #parse string into array using split()
+    # parse string into array using split()
     if str.length() == 0
       return str
     end
 
 
-    #split the string into an array of words, parsed by spaced
+    # split the string into an array of words, parsed by spaced
     wordArray = str.split()
     
-    #find the length 
+    # find the length 
     a = wordArray.length
 
-    #initialize x to 0 for first word in array
+    # initialize x to 0 for first word in array
     x = 0
 
-    #while loop to go through all of the words and replace is necessary 
+    # while loop to go through all of the words and replace is necessary 
     while x < a do
 
-        #check the length of the word after discarding special characters
+        # check the length of the word after discarding special characters
         currentWord = wordArray[x].gsub(/[\W]/, '')
 
-        #find length of current word
+        # find length of current word
         c = currentWord.length
 
-        #check the word has more than 4 characters
+        # check the word has more than 4 characters
       if c >= 5
 
-          #store first letter in word in charCheck
+          # store first letter in word in charCheck
           uppercaseCheck = currentWord[0]
 
-          #check if first letter is uppercase, if so replace with capital M
+          # check if first letter is uppercase, if so replace with capital M
           if uppercaseCheck == uppercaseCheck.upcase
 
             wordArray[x] = wordArray[x].gsub(/[\w]/, '') 
             wordArray[x] = wordArray[x].prepend("Marklar")
+
           else 
 
             wordArray[x] = wordArray[x].gsub(/[\w]/, '') 
@@ -49,7 +50,7 @@ class Exercise
       
       end
 
-      #increment
+      # increment
       x += 1
    
   end
@@ -71,38 +72,36 @@ end
       return 0
     end
   
-    #set up the necessary variables in order to loop through the seqience
-    secondNumber = 1
-    firstNumber = 1
-    nextNumber = 0
-
-    #Initialize counter and sum
+    # set up the necessary variables in order to loop through _only_ the even numbers of the sequence, using 0 and 2 here will not produce a different seq than 1 and 1
+    secondNumber = 0
+    firstNumber = 2
+   
+    # initialize counter and sum
     counter = 3
-    sum = 0
+    sum = 2
 
-    #start a while loop to calculate fib sequence until the Nth value
-    while counter <= nth do
-
-      #calculate the next number
-      nextNumber = firstNumber + secondNumber
-      
-  
-      #since the Fibonacci sequence has a pattern of odd, odd even
-      #we can divide by three to see if it is the 3rd value
-      #if so, add to the sum
-      if counter % 3 == 0
-          sum += nextNumber
-      end
-
-        secondNumber = firstNumber
-        firstNumber = nextNumber
-        
-        #increment 
-        counter += 1;
+  # a while loop that will iterate through _only_ the even numbers of the fibbonaci sequence
+   while counter <= nth do
     
+    counter += 3
+    
+    # break early if the counter has exceeded the limit
+    if nth <= counter
+       break
     end
 
-    #return the total sum
+    # calculate next even number in the fibonacci sequence
+    # proof for this formula can be found here: https://www.geeksforgeeks.org/nth-even-fibonacci-number/
+
+    nextNumber = 4 * firstNumber + secondNumber
+
+    # increment numbers and add to the sum 
+    secondNumber = firstNumber
+    firstNumber = nextNumber
+    sum = sum + firstNumber
+
+  end
+   
     return sum
   
   end
